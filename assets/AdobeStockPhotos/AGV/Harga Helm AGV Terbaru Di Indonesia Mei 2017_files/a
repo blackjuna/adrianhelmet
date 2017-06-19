@@ -1,0 +1,39 @@
+(function() {
+   var CodeScript = document.createElement("script");
+   CodeScript.type = "text/javascript";
+   CodeScript.src  = "//st-n.ads3-adnow.com/js/adv_cto.js";
+   document.getElementsByTagName("head")[0].appendChild(CodeScript);var f = function () {
+     window['SC_AdvCto'].init({
+    'codeId': 253925,          
+    'siteId': 156212,
+    'adnId': 17,
+    'tCount': 6,
+    'textLayout': 3,
+    'siteStatus': 1, 
+    'ip': '125.161.124.92',
+    'country2' : 'id',
+    'codeType' : 1,
+    'time' : 1495954523998,
+    'site' : {
+      ext : { cat_id : 0 }
+    }
+    });
+     };
+     CodeScript.onload = f;
+     CodeScript.onreadystatechange = function () {
+     if (this.readyState != "complete" && this.readyState != "loaded") return;
+     f();
+     }
+   }).call(); (function() {
+   var CodeScript = document.createElement("script");
+   CodeScript.type = "text/javascript";
+   CodeScript.src  = "//st-n.ads3-adnow.com/js/t.js";
+   document.getElementsByTagName("head")[0].appendChild(CodeScript);var f = function () {
+     SC_TeaserBlock.writeBlockNew('SC_TBlock_', 253925,{"type":1,"bidid":"SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5","impid":"SCI-107-253925-j38cp64v-1bt0","site_id":156212,"adn_id":17,"code_id":253925,"teasers":[{"lb_title":"Apotek sejak lama menyembunyikan obat manjur pembasmi parasit dari tubuh manusia","lb_img_url":"https://cdn.user-api.com/r/58bd2807287f3e420f8b4755/img_80x80.jpg","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCRDc5dTZDQmhqYjZLbkpCUSoqJmNyaWQ9YTo3ZTgxNTA1YmI3YzZhZTM1MzU2NmNjNzhjNmNmZDg3Yw&h=d4477efd3720168a73bda450152e0b9c","lb_from_exchange":0,"adm_html":"","lb_id":8841},{"lb_title":"Lemak perut akan hilang dalam beberapa hari jika sebelum tidur Anda...","lb_img_url":"https://cdn.user-api.com/r/1g50B/img_80x80.gif","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCREE2cm5MQWhqYjZLbkpCUSoqJmNyaWQ9YTpjZGY4N2UyMDgyNTM5OWZhMWFkOWU0ZmRmNzY3MmMzMg&h=627f40f801a2ceffbd7a60740f73a348","lb_from_exchange":0,"adm_html":"","lb_id":5067},{"lb_title":"Cara mudah singkirkan lemak perut 36 kg 2 minggu. Sebelum tidur, ambil 1 sdt...","lb_img_url":"https://cdn.user-api.com/r/58591211287f3e7f138b4c03/img_80x80.gif","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCRHg5OVBHRHhqYjZLbkpCUSoqJmNyaWQ9YTo2YWM4ZWIwYWNhOWIxNDljNWI4MmM3NzczNTBkMWQ0OA&h=bd58a12cd3f97fadc6ee7cf9c745be5a","lb_from_exchange":0,"adm_html":"","lb_id":605},{"lb_title":"Makhluk mengerikan akan keluar dari tubuh jika di pagi hari kamu minum segelas","lb_img_url":"https://cdn.user-api.com/r/58e349a4287f3e7b5b8b4b3f/img_80x80.gif","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCQ3EzUGpTQ1JqYjZLbkpCUSoqJmNyaWQ9YTo1ZjdhY2ZkZGQ3ZTk0ZGI1OTZkYjlhOWM1ZjAwM2EwNQ&h=2f1aa31077d02c85ea1c453916c654d8","lb_from_exchange":0,"adm_html":"","lb_id":8626},{"lb_title":"JANGAN PERNAH makan ini! Berat Anda akan turun terus!","lb_img_url":"https://cdn.user-api.com/r/587ba56d287f3ee7308b4d04/img_80x80.jpeg","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCQ0duLTIwQnhqYjZLbkpCUSoqJmNyaWQ9YToxYzBmMDNmMDY0Zjk1MDk4ZmNlNDRmZGVjZDRiZjVjNQ&h=3054d3f2bb465e173d1e6d00452c8e99","lb_from_exchange":0,"adm_html":"","lb_id":4039},{"lb_title":"Dokter merahasiakan ini! Untuk turun 47 kg dalam 21 hari sebelum makan...","lb_img_url":"https://cdn.user-api.com/r/58be2da3287f3e345b8b47a4/img_80x80.jpg","lb_click_url":"//n.hclick-adnow.com/click?impid=SCI-107-253925-j38cp64v-1bt0&bidid=SCB-107-ssp-0d292098-e09b-ab6e-0eff-1495954377-j38cp64v-12e5&adt=1&sip=eyJpcCI6IjEyNS4xNjEuMTI0LjkyIiwiY25yIjoiSUQiLCJoYXNoIjoiZmUyN2Q0MjlmYzNhOWI1NGI0Mzc2YjMyNjllMzA3YzcifQ&u=aHR0cHM6Ly9sb2cudXNlci1jbGlja3MuY29tLz9zcmM9c21hMSZzX2FjdD1jJnNfdHJrPUNnakd4amcxTWpCUlVCRGhtZmIyQ0JqYjZLbkpCUSoqJmNyaWQ9YTpmNzhjYjJkOTJiMjg3MmRiNmNkMDNkNTE0N2QzMDQ5MA&h=903f15c7a590751a305ad7f6bfa258ff","lb_from_exchange":0,"adm_html":"","lb_id":7185}],"code":{"background_color":"ffffff","background_color_hover":"ffffff","border":1,"border_color":"c4c4c4","border_size":7,"builder_version":"table","fix_number_of_rows_if_adaptive":0,"font_bold":1,"font_bold_hover":1,"font_color":"ef7853","font_color_hover":"575757","font_family":"Arial","font_family_hover":"Verdana","font_size":13,"font_size_hover":12,"font_underline":0,"font_underline_hover":1,"h_count":3,"image_border":0,"image_border_color":"ffffff","image_border_size":0,"image_margin":3,"image_size":"80","image_size_to":0,"is_adaptive":0,"minimum_column_number_if_adaptive":1,"text_adjust_by_image":1,"text_h_align":2,"text_layout":3,"text_v_align":1,"v_count":2},"prefix":"SC_TBlock_253925","imgStatUrl":"//n.ads3-adnow.com/st?d=eyJ0aW1lIjoxNDk1OTU0NTI0LCJhZG5faWQiOjE3LCJhZHRfaWQiOjEsImNvZGVfaWQiOjI1MzkyNSwic2l0ZV9pZCI6MTU2MjEyLCJzdWJfaWQiOiIiLCJjbnJfY29kZSI6IklETiIsImNpdHkiOiJKYWthcnRhIiwiZHNwIjoxMDcsImFkdF9mb3JtYXQiOiIzeDIifQ","ad_html":"<img src='https://log.user-clicks.com/?src=sma1&s_act=s&s_trk=CgjGxjg1MjBRUBD79u6CBhjb6KnJBQ**' style='width:0px;height:0px;display:none;' />","settings":{}}, {"hintInfo":{"title":"<div style=\"font-size:12px;background-color: rgba(255, 255, 255, 0.8);padding: 0;\"><img src=\"//st-n.ads5-adnow.com/i/logo/adnow-mini-v2.png\" /></div>","adn_name":"adnow","html":"<div style=\"text-align: center;\"><a href=\"http://adnow.com/redirect.php?country=id&lang=id\" target=\"_blank\"><img src=\"//st.n.ads5-adnow.com/i/logo/adnow-v2.png\"/></a></div><p>Our innovative platform <a href=\"http://adnow.com/redirect.php?country=id&lang=id\" target=\"_blank\"><b>Adnow </b></a> will provide some of the most high selling products and greater earnings for websites!</p>\n<p>In order to increase the sales and earnings of our partners, we carefully select advertisements that will fit target audience's interests and desires. </p>\n<p>Would you like to earn more?</p>\n<p><a href=\"http://adnow.com/redirect.php?country=id&lang=id\" target=\"_blank\">Don't hesitate! Register now! </a></p>"},"readMore":"Read more","abuseModule":{"enable":true,"words":["I am not interested in this topic","This is obtrusive and I am bored with this","The content is suspicious or spam","This conflicts with the visibility of the content"]}}, {"script":"t.js","builderObject":"SC_TeaserBlock","codeType":1}); 
+     };
+     CodeScript.onload = f;
+     CodeScript.onreadystatechange = function () {
+     if (this.readyState != "complete" && this.readyState != "loaded") return;
+     f();
+     }
+   }).call();

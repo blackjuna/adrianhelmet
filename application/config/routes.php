@@ -49,20 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-
-// Halaman Utama
-$route['default_controller'] = 'Vb';
-
-// Htaccess Pelangi Baby
-$route['produk/(:any)'] = 'vb/produk/$1';
-$route['laman/(:any)'] = 'vb/laman/$1';
-$route['kategori/(:any)'] = 'vb/kategori/$1';
-$route['kategori/(:any)/(:num)'] = 'vb/kategori/$1/$2';
-$route['promo/(:any)/(:any)'] = 'vb/promo/$1/$2';
-$route['keranjang_belanja'] = 'vb/keranjang_bel';
-$route['testimoni'] = 'vb/feedback';
-$route['pemesanan'] = 'vb/keranjang_bel/pemesanan';
-
-// Halaman Error
-$route['404_override'] = 'pb/a22s404';
+$route['default_controller'] = 'home';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['auth'] = 'users/auth/index';
+$route['auth/(.*)'] = 'users/auth/$1';
