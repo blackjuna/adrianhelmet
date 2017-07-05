@@ -20,14 +20,15 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->home_lib->go();
 		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('slider');
-		$this->load->view('sidebar');
-		$this->load->view('content');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+		// $this->load->view('header');
+		// $this->load->view('topbar');
+		// $this->load->view('slider');
+		// $this->load->view('sidebar');
+		// $this->load->view('content');
+		// $this->load->view('bottombar');
+		// $this->load->view('js');
+		// $this->load->view('footer');
 	}
 }

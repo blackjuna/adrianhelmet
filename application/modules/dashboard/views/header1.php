@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--   <style type="text/css">
-    .first-column {
-      width: 40%;
-      float: left;
-    }
-
-    .second-column {
-      width: 40%;
-      float: right;
-    }
-  </style> -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?=$app_title;?></title>
@@ -47,6 +36,24 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 70%;
+        margin: auto;
+    }
+    div.new_html_code {
+      width:150px;
+      height:100px;
+      min-width:150px;
+      min-height:100px;
+      max-width:200px;
+      max-height:100px;
+      overflow:hidden;
+      display:block;
+      border:1px solid red;
+    }
+  </style>
 </head>
 <body class="hold-transition skin-red-light sidebar-mini sidebar-collapse ">
 <!-- Site wrapper -->

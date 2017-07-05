@@ -49,11 +49,7 @@ class Auth extends CI_Controller {
 
 	// log the user in
 	public function login()
-	{
-		// foreach ($data['breadcrumbs'] as $key => $value) {
-		// 	$this->breadcrumbs->push($key, $value);
-		// }
-		
+	{	
 		$this->data['title'] = $this->lang->line('login_heading');
 
 		//validate form input

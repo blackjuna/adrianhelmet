@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array("database", "session", "users/Ion_auth", "users/bcrypt","breadcrumbs");
+$autoload['libraries'] = array("database", "session", "users/Ion_auth", "users/bcrypt","breadcrumbs","home/home_lib","dashboard/dashboard_lib");
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url','shared/shared_function','form');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('shared/shared_model', 'systems/systems_model');

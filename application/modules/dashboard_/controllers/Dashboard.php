@@ -17,15 +17,15 @@ class Dashboard extends CI_Controller {
 			redirect('auth/login', 'refresh');
 
 		// SET LAST URL
-		// $last_url = $this->session->userdata('last_url'); 
-		// if ( empty($last_url) )
-		// 	$this->session->set_userdata(array('last_url'=>"dashboard/home"));
+		$last_url = $this->session->userdata('last_url'); 
+		if ( empty($last_url) )
+			$this->session->set_userdata(array('last_url'=>"main/home"));
 
-		// $data['menus'] = $this->systems_model->getGroups_Auth_ByGroupId( explode(",", sesUser()->u_groups) );
-		// $data['is_form'] = 0;
-		// $this->load->view('dashboard/home', $data);
+		$data['menus'] = $this->systems_model->getGroups_Auth_ByGroupId( explode(",", sesUser()->u_groups) );
+		$data['is_form'] = 0;
+		$this->load->view('dashboard/home', $data);
 
-		$this->dashboard_lib->go('dashboards','home');
+		// $this->dashboard_lib->go('dashboards','home');
 	}
 
 	public function home( $username=NULL, $pwd=NULL ) {

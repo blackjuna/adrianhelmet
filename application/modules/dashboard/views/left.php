@@ -3,9 +3,9 @@
     <!-- Logo -->
     <a href="<?= base_url();?>main/home" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>HD</b></span>
+      <span class="logo-mini"><b>AH</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>HD</b> SYSTEM</span>
+      <span class="logo-lg"><b>Adrian</b> Helmet</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -25,7 +25,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?= base_url('assets/dist/img/'.$image);?>" class="user-image" alt="User Image">
+              <img src="<?= base_url('assets/bootstrap-adminlte/dist/img/'.$image);?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?=$first_name.' '.$last_name?></span>
             </a>
             <ul class="dropdown-menu">
@@ -74,7 +74,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-       <!--  <?php 
+        <?php 
         // MENU
         $module_group_id = 0;
         $module_id=0;
@@ -110,7 +110,7 @@
             echo '<li><a href="'.$module_page_link.'"><i class="fa fa-circle-o text-aqua"></i>'.$menu->module_name.'</a></li>';
           }
         }
-        ?> -->
+        ?> 
       </ul>
     </section>
     <!-- /.sidebar -->
