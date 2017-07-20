@@ -2,7 +2,6 @@
   <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
-
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
@@ -19,8 +18,10 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          <button class="btn btn-success" onclick="add_users()"><i class="glyphicon glyphicon-plus"></i> Add</button>
-          <button class="btn btn-sm btn-primary" onclick="change_password()"><i class="glyphicon glyphicon-pencil"></i> Change Password</button>
+          <button class="btn btn-success" onclick="add_users()"><i class="glyphicon glyphicon-plus"></i> Tambah</button>
+          <button class="btn btn-primary" onclick="change_password()"><i class="glyphicon glyphicon-pencil"></i> Ubah</button>
+          <button class="btn btn-warning" onclick="change_password()"><i class="glyphicon glyphicon-pencil"></i> Ubah Kata Sandi</button>
+          <button class="btn btn-danger" onclick="change_password()"><i class="glyphicon glyphicon-remove"></i> Remove</button>
           <button class="btn btn-default" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload</button>
         </div>
         <!-- /.box-footer-->
@@ -31,12 +32,55 @@
   </div>
   <!-- /.content-wrapper -->
 
+ <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <!-- <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li> -->
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
   <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.7
+    </div>
+    <strong>AdrianHelmet &copy; 2016 Copyright to it's <a href="http://almsaeedstudio.com">Owner</a>.</strong> All rights
+    reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
-<script src="<?= base_url();?>assets/datatables/DataTables-1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url();?>assets/datatables/DataTables-1.10.12/js/dataTables.bootstrap.js"></script>
+
+<?php
+// $this->load->view($js);
+$this->load->view('js');
+?>
 </body>
 </html>
 
@@ -59,12 +103,13 @@
             "type": "POST"
         },
         "columns": [
-        { "title": "USER NAME" },
-        { "title": "EMAIL" },
-        { "title": "FIRST NAME" },
-        { "title": "LAST NAME" },
-        { "title": "PHONE" },
-        { "title": "ACTION" }
+        { "data":"no","title": "NO" },
+        { "data":"username","title": "USER NAME" },
+        { "data":"email","title": "EMAIL" },
+        { "data":"first_name","title": "FIRST NAME" },
+        { "data":"last_name","title": "LAST NAME" },
+        { "data":"role","title": "ROLE" },
+        { "data":"DT_RowId","title": "ID" }
         
 
         ],
@@ -96,18 +141,18 @@
 
 function add_users()
 {
-    save_method = 'update';
-    $('#form')[0].reset(); // reset form on modals
+    save_method = 'add';
+    $('#formname')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add Users'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Entri Pengguna'); // Set Title to Bootstrap modal title
 }
 
 function change_password()
 {
-    save_method = 'add';
-    $('#form')[0].reset(); // reset form on modals
+    save_method = 'update';
+    $('#formname')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_change_password').modal('show'); // show bootstrap modal
@@ -116,6 +161,7 @@ function change_password()
 
 function save()
 {
+    var formData = new FormData( $("#formname")[0] );
     $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
     var url;
@@ -130,7 +176,11 @@ function save()
     $.ajax({
         url : url,
         type: "POST",
-        data: $('#form').serialize(),
+        data: formData,
+        async : false,
+        cache : false,
+        contentType : false,
+        processData : false,
         dataType: "JSON",
         success: function(data)
         {
@@ -231,51 +281,81 @@ function reload_table()
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Users Form</h3>
+                <h3 class="modal-title"></h3>
             </div>
             <div class="modal-body form">
-                <form action="#" id="form" class="form-horizontal">
+                <form method="post" action="" enctype="multipart/form-data" id="formname" accept-charset="utf-8" class="form-horizontal">
                     <input type="hidden" value="" name="id"/> 
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">User Name</label>
+                            <label class="control-label col-md-3">Nama Pengguna</label>
                             <div class="col-md-9">
-                                <input name="username" placeholder="User Name" class="form-control" type="text">
+                                <input name="username" id="username" placeholder="User Name" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3">Email</label>
                             <div class="col-md-9">
-                                <input name="email" placeholder="Email" class="form-control" type="email">
+                                <input name="email" id="email" placeholder="Email" class="form-control" type="email">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">First Name</label>
+                            <label class="control-label col-md-3">Nama Depan</label>
                             <div class="col-md-9">
-                                <input name="firstname" placeholder="First Name" class="form-control" type="text">
+                                <input name="firstname" id="firstname" placeholder="First Name" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Last Name</label>
+                            <label class="control-label col-md-3">Nama Akhir</label>
                             <div class="col-md-9">
-                                <input name="lastname" placeholder="Last Name" class="form-control" type="text">
+                                <input name="lastname" id="lastname" placeholder="Last Name" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Password</label>
+                            <label class="control-label col-md-3">Telpon</label>
                             <div class="col-md-9">
-                                <input name="password" placeholder="password" class="form-control" type="password">
+                                <input name="telpon" id="telpon" class="form-control" placeholder="Telpon">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Confirm Password</label>
+                            <label class="control-label col-md-3">Alamat</label>
                             <div class="col-md-9">
-                                <input name="confirmpassword" placeholder="Confirm Password" class="form-control" type="password">
+                                <textarea name="alamat" id="alamat" rows="3" placeholder="Alamat" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Kata Sandi</label>
+                            <div class="col-md-9">
+                                <input name="password" id="password" placeholder="password" class="form-control" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Konfirm Kata Sandi</label>
+                            <div class="col-md-9">
+                                <input name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" class="form-control" type="password">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Role</label>
+                            <div class="col-md-9">
+                                <select name="role" id="role" class="form-control"><option></option>
+                                    <option value='1'>Admin</option>
+                                    <option value='2'>Member</option> 
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">File Foto</label>
+                            <div class="col-md-9">
+                                <input type="file" name="filefoto" id="filefoto" class="form-control">
                                 <span class="help-block"></span>
                             </div>
                         </div>

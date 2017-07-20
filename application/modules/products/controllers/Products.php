@@ -2,7 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Products extends CI_Controller {
+	public $mdl_grp		= 'Products';
 
+	function __construct() {
+		parent::__construct();
+		date_default_timezone_set('Asia/Jakarta');
+		$this->load->model('Products_model','Products_m');
+		// $this->load->library('Xmpp');
+		// $xmppPrebind = new XmppPrebind('AXIOO-PC', 'http://axioo-pc:7070/http-bind/', 'conversejs', false, false);
+	}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -21,26 +29,49 @@ class Products extends CI_Controller {
 	public function index()
 	{
 		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('header_end');
-		$this->load->view('sidebar');
-		// $this->load->view('special_offers');
-		$this->load->view('product_details');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
 	}
 
 	public function product_details()
 	{
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('header_end');
-		$this->load->view('sidebar');
-		$this->load->view('product_details');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+
+	}
+
+	public function half_face()
+	{
+		$mdl = 'half_face';	
+
+		$data['id_merk']= $_GET['id_merk'];
+		$data['id_category']=1;
+		$data=$this->input->post();
+		// var_dump($data['id_category']);
+		// exit;
+
+		$this->home_lib->go($this->mdl_grp, $mdl);
+	}
+
+	public function full_face()
+	{
+		$mdl = 'full_face';	
+
+		// $data['id_merk']= $_GET['id_merk'];
+		// $data['id_category']=2;
+
+		// var_dump($data);
+		// exit;
+
+		$this->home_lib->go($this->mdl_grp, $mdl);
+	}
+
+	public function details()
+	{
+		$mdl = 'details';	
+
+		// $data['id_merk']= $_GET['id_merk'];
+		// $data['id_category']=2;
+
+		// var_dump($data);
+		// exit;
+
+		$this->home_lib->go($this->mdl_grp, $mdl);
 	}
 }

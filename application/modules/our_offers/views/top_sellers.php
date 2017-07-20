@@ -1,21 +1,11 @@
 <div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li><a href="<?=base_url();?>">Home</a> <span class="divider">/</span></li>
 		<li class="active">Top Sellers</li>
     </ul>
-	<h4> Top Sellers<small class="pull-right"> 40 products are available </small></h4>	
+	<h4> Top Sellers<small class="pull-right"> <?php echo count($this->Offers_m->getTopProduct_query()); ?> products are available </small></h4>	
 	<hr class="soft"/>
-	<form class="form-horizontal span6">
-		<div class="control-group">
-		  <label class="control-label alignL">Sort By </label>
-			<select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-		</div>
-	  </form>
+	<br class="clr"/>
 	<div id="myTab" class="pull-right">
 	 <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
 	 <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
@@ -23,283 +13,51 @@
 <br class="clr"/>
 <div class="tab-content">
 	<div class="tab-pane" id="listView">
-		<div class="row">	  
-			<div class="span2">
-			<img src="<?= base_url();?>assets/themes-shop/images/products/b1.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
-			<form class="form-horizontal qtyFrm">
-			<h3> $110.00</h3>
-			<label class="checkbox">
-				<input type="checkbox">  Adds product to compair
-			</label><br/>
-			  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-			  <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				</form>
-			</div>
-	</div>
-	<hr class="soft"/>
-	<div class="row">	  
-			<div class="span2">
-				<img src="<?= base_url();?>assets/themes-shop/images/products/b2.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
-			<form class="form-horizontal qtyFrm">
-				<h3> $110.00</h3>
-				<label class="checkbox">
-				<input type="checkbox">  Adds product to compair
-				</label><br/>
-				<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-			</form>
-			</div>
-	</div>
-	<hr class="soft"/>
-	<div class="row">	  
-			<div class="span2">
-				<img src="<?= base_url();?>assets/themes-shop/images/products/b3.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
-			<form class="form-horizontal qtyFrm">
-			<h3> $110.00</h3>
-			<label class="checkbox">
-			<input type="checkbox">  Adds product to compair
-			</label><br/>
-			  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-			  <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-			</form>
-			</div>
-	</div>
-	<hr class="soft"/>
-	<div class="row">	  
-			<div class="span2">
-				<img src="<?= base_url();?>assets/themes-shop/images/products/b4.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
+		<?php
+			$produk_list = $this->Offers_m->getTopProduct_query();
+			foreach($produk_list as $list){
+				$link_image = site_url('assets/images/'.$list->img_link);
+				// $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+				// $price = money_format('%i', $list->price);
+				echo '<div class="row">	  
+						<div class="span2">';
+				echo '<a href="'.site_url("products/details?id_product=".$list->id_product."").'"><img src="'.$link_image.'" alt="'.$list->product_name.'"/></div>';
+				echo '<div class="span4">
+					<h3>New | Available</h3>				
+					<hr class="soft"/>';
+				echo '<h5>'.str_replace("-", " ", $list->product_name).'</h5>';
+				echo '<p>'.$list->note1.'</p>';
+				echo '<a class="btn btn-small pull-right" href="'.site_url("products/details?id_product=".$list->id_product."").'">View Details</a>
+						<br class="clr"/></div>';
+				echo '<div class="span3 alignR">
 				<form class="form-horizontal qtyFrm">
-				<h3> $110.00</h3>
-				<label class="checkbox">
-				<input type="checkbox">  Adds product to compair
-				</label><br/>
-				<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				</form>
-			</div>
-	</div>
-	
-	<hr class="soft"/>
-	<div class="row">	  
-			<div class="span2">
-				<img src="<?= base_url();?>assets/themes-shop/images/products/6.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
-				<form class="form-horizontal qtyFrm">
-				<h3> $222.00</h3>
-				<label class="checkbox">
-				<input type="checkbox">  Adds product to compair
-				</label><br/>
-				<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				</form>
-			</div>
-	</div>
-	<hr class="soft"/>
-		<div class="row">	  
-			<div class="span2">
-				<img src="<?= base_url();?>assets/themes-shop/images/products/7.jpg" alt=""/>
-			</div>
-			<div class="span4">
-				<h3>New | Available</h3>				
-				<hr class="soft"/>
-				<h5>Product Name </h5>
-				<p>
-				
-				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
-				</p>
-				<a class="btn btn-small pull-right" href="product_details.html">View Details</a>
-				<br class="clr"/>
-			</div>
-			<div class="span3 alignR">
-				<form class="form-horizontal qtyFrm">
-				<h3> $222.00</h3>
-				<label class="checkbox">
-				<input type="checkbox">  Adds product to compair
-				</label><br/>
-				<a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-				</form>
-			</div>
-		</div>
-	<hr class="soft"/>
+					<h3> Rp.'.$list->price.'</h3>';
+				echo '<a href="'.site_url("invoices/add/".$list->id_product."").'" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+					</form></div></div><hr class="soft"/>';
+			}
+		?>
 	</div>
 
 	<div class="tab-pane  active" id="blockView">
 		<ul class="thumbnails">
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/b1.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/b2.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/b3.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/b4.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/9.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/4.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/6.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/7.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
-			<li class="span3">
-			  <div class="thumbnail">
-				<a href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/8.jpg" alt=""/></a>
-				<div class="caption">
-				  <h5>Manicure &amp; Pedicure</h5>
-				  <p> 
-					Lorem Ipsum is simply dummy text. 
-				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-				</div>
-			  </div>
-			</li>
+			<?php
+				$produk_list = $this->Offers_m->getTopProduct_query();
+				foreach($produk_list as $list){
+					$link_image = site_url('assets/images/'.$list->img_link);
+					// $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+					// $price = money_format('%i', $list->price);
+					echo '<li class="span3">
+			 				<div class="thumbnail">';
+					echo '<a href="'.site_url("products/details?id_product=".$list->id_product."").'"><img src="'.$link_image.'" alt="'.$list->product_name.'"/></a>';
+					echo '<div class="caption"><h5>'.str_replace("-", " ", $list->product_name).'</h5><p>'.$list->note1.'</p>';
+					echo '<h4 style="text-align:center"><a class="btn" href="'.site_url("invoices/add/".$list->id_product."").'">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="'.site_url("products/details?id_product=".$list->id_product."").'">Rp.'.$list->price.'</a></h4>
+						</div></div></li>';
+				}
+			?>
 		  </ul>
-
-
 	<hr class="soft"/>
 	</div>
 </div>
-<a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
 	<div class="pagination">
 		<ul>
 		<li><a href="#">&lsaquo;</a></li>

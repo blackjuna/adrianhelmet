@@ -9,7 +9,10 @@
 <!-- ./wrapper -->
 
 <?php
-$this->load->view($js);
+// $this->load->view($js);
+$this->load->view('js');
+
 ?>
 </body>
 </html>
+

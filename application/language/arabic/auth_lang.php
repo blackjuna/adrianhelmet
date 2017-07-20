@@ -26,7 +26,7 @@ $lang['login_subheading']      = 'Please login with your email/username and pass
 $lang['login_identity_label']  = 'Email/Username:';
 $lang['login_password_label']  = 'Password:';
 $lang['login_remember_label']  = 'Remember Me:';
-$lang['login_submit_btn']      = 'Login';
+$lang['login_submit_btn']      = 'Masuk';
 $lang['login_forgot_password'] = 'Forgot your password?';
 
 // Index

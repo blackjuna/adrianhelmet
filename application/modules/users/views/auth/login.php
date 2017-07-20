@@ -31,34 +31,38 @@
       <!-- /.login-logo -->
       <div class="login-box-body">
         <fieldset>
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">Mulai untuk masuk ke program</p>
           <!-- <form action="<?= base_url();?>index.php/auth/login" method="post"> -->
           <?php echo form_open("auth/login");?>
           <div class="form-group has-feedback">
-            <?php echo form_input($identity,'','class="form-control" placeholder="User Name" type="text" autofocus');?>
+            <?php echo form_input($identity,'','class="form-control" placeholder="Nama User" type="text" autofocus');?>
             <!-- <input type="text" class="form-control" placeholder="User Name" > -->
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <?php echo form_input($password,'','class="form-control" placeholder="Password"  type="password"');?>
+            <?php echo form_input($password,'','class="form-control" placeholder="Kata Sandi"  type="password"');?>
             <!-- <input type="password" class="form-control" placeholder="Password"> -->
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
             <div class="col-xs-8">
             </div>
+            
             <!-- /.col -->
             <div class="col-xs-4">
               <?php echo form_submit('submit', lang('login_submit_btn'),'class="btn btn-primary btn-block btn-flat"');?>
               <?php echo form_close();?>
               <!-- <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button> -->
             </div>
+            <div class="col-xs-6">
+            <a href="<?=base_url()?>"> Lupa Kata Sandi</a>
+            </div>
             <!-- /.col -->
           </div>
         </fieldset>
         <?php echo $message;?>
         <div class="social-auth-links text-center">
-          <p></p>
+          
         </div>
         <!-- /.social-auth-links -->
         <!-- <a href="#">I forgot my password</a><br>

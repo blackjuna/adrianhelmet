@@ -2,33 +2,35 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
+	public $mdl_grp		= 'home';
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+	function __construct() {
+		parent::__construct();
+		date_default_timezone_set('Asia/Jakarta');
+		$this->load->model('home_model','home_m');
+		// $this->load->library('Xmpp');
+		// $xmppPrebind = new XmppPrebind('AXIOO-PC', 'http://axioo-pc:7070/http-bind/', 'conversejs', false, false);
+	}
+
 	public function index()
 	{
-		$this->home_lib->go();
-		// $this->load->library('session');
-		// $this->load->view('header');
-		// $this->load->view('topbar');
-		// $this->load->view('slider');
-		// $this->load->view('sidebar');
-		// $this->load->view('content');
-		// $this->load->view('bottombar');
-		// $this->load->view('js');
-		// $this->load->view('footer');
+		// if ( !$this->ion_auth->logged_in() ) 
+		// 	redirect('auth/login', 'refresh');
+
+		// SET LAST URL
+		// $last_url = $this->session->userdata('last_url'); 
+		// if ( empty($last_url) )
+		// 	$this->session->set_userdata(array('last_url'=>"dashboard/home"));
+
+		// $data['menus'] = $this->systems_model->getGroups_Auth_ByGroupId( explode(",", sesUser()->u_groups) );
+		// $data['is_form'] = 0;
+		// $this->load->view('dashboard/home', $data);
+
+		$this->home_lib->go('home','content');
+	}
+
+	public function content( $username=NULL, $pwd=NULL ) {
+		$mdl = 'content';		
+		$this->home_lib->go($this->mdl_grp, $mdl);
 	}
 }

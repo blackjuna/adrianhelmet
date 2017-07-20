@@ -3,340 +3,31 @@
 // session_start(); //we need to call PHP's session object to access it through CI
 
 class Systems extends CI_Controller {
-
 	private $mdl_grp	= 'systems';
 		
-	function __construct() {
+	function __construct() 
+	{
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
 		
 		$this->load->model('systems_model','system');
 	}
 
-	function index() {
+	function index() 
+	{
 		if (!$this->ion_auth->logged_in())
 			redirect('main', 'refresh');
 		
 		redirect('main', 'refresh');
 	}
 
-	function company( $action=NULL ) {
+	function modules_group( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
 			redirect('main', 'refresh');
 
-		$mdl 	 	= 'COMPANY';
+		$mdl 	 	= 'MODULES_GROUP';
 		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
-		
-		if ( $action == 'c' ){
-			$this->_validatecompany();
-
-			$data = $this->input->post();
-			if ( empty($data) ) 
-				crud_error("Error: Empty Data !");
-
-			$this->db->trans_begin();
-			try {
-				$data1['code'] 	   		= strtoupper($data['codecompany']);
-				$data1['name'] 			= strtoupper($data['name']);
-				$data1['address'] 		= strtoupper($data['address']);
-				$data1['created_id']   	= $user_id;
-				$data1['modified_id']   = $user_id;
-				$data1['created_date'] 	= date('Y-m-d H:i:s');
-				$data1['modified_date'] = date('Y-m-d H:i:s');
-				$data1['deleted'] 		= 0;
-			
-				$this->db->insert('c_company', $data1);
-				$id = $this->db->insert_id();
-				
-			} catch (Exception $e) {  
-				crud_error($e->getMessage());
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>TRUE));
-			exit;
-		}
-
-		if ( $action == 'r' ) {
-			$list = $this->system->getCompany();
-			// var_dump($list);
-			// exit;
-			$data = array();
-			$no = $_POST['start'];
-			$nomor=0;
-			foreach ($list as $company) {
-				$no++;
-				$row = array();
-				$row[] = $company->code;
-				$row[] = $company->name;
-				$row[] = $company->address;
-
-				//add html for action
-				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_company('."'".$company->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-					  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_company('."'".$company->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-			
-				$data[] = $row;
-			}
-
-			$output1 = array(
-							"draw" => $_POST['draw'],
-							"recordsTotal" => $this->system->countcompany(),
-							"recordsFiltered" => $this->system->countcompany_filtered(),
-							"data" => $data,
-					);
-			//output to json format
-			echo json_encode($output1);			
-
-			exit;
-		}
-
-		if ( $action == 'u' ) {
-			$this->_validatecompany();
-			
-			$data = $this->input->post();
-			if ( empty($data) ) 
-				crud_error("Error: Empty Data !");			
-			$this->db->trans_begin();
-			
-			try {
-				$data1['code'] 				= strtoupper($data['codecompany']);
-				$data1['name'] 				= strtoupper($data['name']);
-				$data1['address'] 			= strtoupper($data['address']);
-				$data1['modified_id']   	= $user_id;
-				$data1['modified_date'] 	= date('Y-m-d H:i:s');
-				$this->db->update( 'c_company', $data1, array('id'=>$data['id']) );
-				
-			} catch (Exception $e) {  
-				crud_error( $e->getMessage() );
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>true));
-			return;
-		}
-
-		if ( $action == 'd' ) {
-			$data = $this->input->post();
-			$this->db->trans_begin();
-
-			try {
-				$data1['deleted']     = 1;
-				$data1['modified_id']   	= $user_id;
-				$data1['modified_date'] 	= date('Y-m-d H:i:s');
-				$this->db->update( 'c_company', $data1, array('id'=>$data['id']) );
-				
-			} catch (Exception $e) {  
-				crud_error( $e->getMessage() );
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>TRUE));
-			return;
-		}
-
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
-		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
-	}
-	
-	public function company_edit($id)
-	{
-		$data = $this->system->getCompany_by_id($id);
-		echo json_encode($data);
-	}
-
-	private function _validatecompany()
-	{
-		$data = array();
-		$data['error_string'] = array();
-		$data['inputerror'] = array();
-		$data['status'] = TRUE;
-
-		if($this->input->post('codecompany') == '')
-		{
-			$data['inputerror'][] = 'codecompany';
-			$data['error_string'][] = 'Code is required';
-			$data['status'] = FALSE;
-		}
-
-		if($this->input->post('name') == '')
-		{
-			$data['inputerror'][] = 'name';
-			$data['error_string'][] = 'Name is required';
-			$data['status'] = FALSE;
-		}
-
-		if($data['status'] === FALSE)
-		{
-			echo json_encode($data);
-			exit();
-		}
-	}
-
-	function department( $action=NULL ) {
-		if (!$this->ion_auth->logged_in()) 
-			redirect('main', 'refresh');
-
-		$mdl 	 	= 'DEPARTMENTS';
-		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
-		
-		if ( $action == 'c' ){
-			$this->_validatedepartment();
-
-			$data = $this->input->post();
-			if ( empty($data) ) 
-				crud_error("Error: Empty Data !");
-
-			$this->db->trans_begin();
-			try {
-				$data1['code'] 	   		= strtoupper($data['codedepartment']);
-				$data1['name'] 			= strtoupper($data['name']);
-				$data1['created_id']   	= $user_id;
-				$data1['modified_id']   = $user_id;
-				$data1['created_date'] 	= date('Y-m-d H:i:s');
-				$data1['modified_date'] = date('Y-m-d H:i:s');
-				$data1['deleted'] 		= 0;
-			
-				$this->db->insert('c_department', $data1);
-				$id = $this->db->insert_id();
-				
-			} catch (Exception $e) {  
-				crud_error($e->getMessage());
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>TRUE));
-			exit;
-		}
-
-		if ( $action == 'r' ) {
-			$list = $this->system->getDepartment();
-			// var_dump($list);
-			// exit;
-			$data = array();
-			$no = $_POST['start'];
-			$nomor=0;
-			foreach ($list as $department) {
-				$no++;
-				$row = array();
-				$row[] = $department->code;
-				$row[] = $department->name;
-
-				//add html for action
-				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_department('."'".$department->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-					  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_department('."'".$department->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-			
-				$data[] = $row;
-			}
-
-			$output1 = array(
-							"draw" => $_POST['draw'],
-							"recordsTotal" => $this->system->countdepartment(),
-							"recordsFiltered" => $this->system->countdepartment_filtered(),
-							"data" => $data,
-					);
-			//output to json format
-			echo json_encode($output1);			
-
-			exit;
-		}
-
-		if ( $action == 'u' ) {
-			$this->_validatedepartment();
-			
-			$data = $this->input->post();
-			if ( empty($data) ) 
-				crud_error("Error: Empty Data !");			
-			$this->db->trans_begin();
-			
-			try {
-				$data1['code'] 				= strtoupper($data['codedepartment']);
-				$data1['name'] 				= strtoupper($data['name']);
-				$data1['modified_id']   	= $user_id;
-				$data1['modified_date'] 	= date('Y-m-d H:i:s');
-				$this->db->update( 'c_department', $data1, array('id'=>$data['id']) );
-				
-			} catch (Exception $e) {  
-				crud_error( $e->getMessage() );
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>true));
-			return;
-		}
-
-		if ( $action == 'd' ) {
-			$data = $this->input->post();
-			$this->db->trans_begin();
-
-			try {
-				$data1['deleted']     = 1;
-				$data1['modified_id']   	= $user_id;
-				$data1['modified_date'] 	= date('Y-m-d H:i:s');
-				$this->db->update( 'c_department', $data1, array('id'=>$data['id']) );
-				
-			} catch (Exception $e) {  
-				crud_error( $e->getMessage() );
-			} 
-			
-			$this->db->trans_commit();
-			echo json_encode(array("status"=>TRUE));
-			return;
-		}
-
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
-		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
-	}
-	
-	public function department_edit($id)
-	{
-		$data = $this->system->getdepartment_by_id($id);
-		echo json_encode($data);
-	}
-
-	private function _validatedepartment()
-	{
-		$data = array();
-		$data['error_string'] = array();
-		$data['inputerror'] = array();
-		$data['status'] = TRUE;
-
-		if($this->input->post('codedepartment') == '')
-		{
-			$data['inputerror'][] = 'codedepartment';
-			$data['error_string'][] = 'Code is required';
-			$data['status'] = FALSE;
-		}
-
-		if($this->input->post('name') == '')
-		{
-			$data['inputerror'][] = 'name';
-			$data['error_string'][] = 'Name is required';
-			$data['status'] = FALSE;
-		}
-
-		if($data['status'] === FALSE)
-		{
-			echo json_encode($data);
-			exit();
-		}
-	}
-
-	function modules_groups( $action=NULL ) {
-		if (!$this->ion_auth->logged_in()) 
-			redirect('main', 'refresh');
-
-		$mdl 	 	= 'MODULES_GROUPS';
-		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
 		
 		if ( $action == 'c' ){
 			$this->_validatemodule_groups();
@@ -448,10 +139,10 @@ class Systems extends CI_Controller {
 			return;
 		}
 
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
+		// if ( !is_allow('r', $this->mdl_grp, $mdl) )
+		// 	show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function module_group_edit($id)
@@ -501,14 +192,14 @@ class Systems extends CI_Controller {
 		}
 	}
 
-	function modules( $action=NULL ) {
+	function modules( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
 			redirect('main', 'refresh');
 
 		$mdl 	 	= 'MODULES';
 		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
+
 		
 		if ( $action == 'c' ){
 			$this->_validatemodules();
@@ -624,10 +315,10 @@ class Systems extends CI_Controller {
 			return;
 		}
 
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
+		// if ( !is_allow('r', $this->mdl_grp, $mdl) )
+		// 	show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function module_edit($id)
@@ -677,15 +368,13 @@ class Systems extends CI_Controller {
 		}
 	}
 
-
-	function groups_auth( $action=NULL ) {
+	function groups_auth( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
 			redirect('main', 'refresh');
 
 		$mdl 	 	= 'GROUPS_AUTH';
 		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
 		
 		if ( $action == 'c' ){
 			$this->_validategroup_auth();
@@ -801,10 +490,10 @@ class Systems extends CI_Controller {
 			return;
 		}
 
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
+		// if ( !is_allow('r', $this->mdl_grp, $mdl) )
+		// 	show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function group_auth_edit($id)
@@ -854,14 +543,13 @@ class Systems extends CI_Controller {
 		}
 	}
 
-	function groups( $action=NULL ) {
+	function groups( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
 			redirect('main', 'refresh');
 
 		$mdl 	 	= 'GROUPS';
 		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
 		
 		if ( $action == 'c' ){
 			$this->_validate_groups();
@@ -970,10 +658,10 @@ class Systems extends CI_Controller {
 			return;
 		}
 
-		if ( !is_allow('r', $this->mdl_grp, $mdl) )
-			show_error(l('permission_failed_menu'));
+		// if ( !is_allow('r', $this->mdl_grp, $mdl) )
+		// 	show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function groups_edit($id)
@@ -1016,36 +704,78 @@ class Systems extends CI_Controller {
 		}
 	}
 
-
-	function users( $action=NULL ) {
+	function users( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
-			redirect('main', 'refresh');
+			redirect('auth/login', 'refresh');
 
 		$mdl 	 	= 'USERS';
 		$user_id	= $this->session->userdata('user_id');
-		$company_id	 	= $this->session->userdata('company_id');
-		$department_id	= $this->session->userdata('department_id');
 		
 		if ( $action == 'c' ){
-			$this->_validate_groups();
+			$this->_validate_users();
 
 			$data = $this->input->post();
-			if ( empty($data) ) 
-				crud_error("Error: Empty Data !");
+			// $this->db->where('email', $data['email']);
+		 //    $query = $this->db->get('users');
+		 //    $count_row = $query->num_rows();
+		 //    if ($count_row > 0) 
+		 //      	alert("Error: Duplicate Data !");
 
 			$this->db->trans_begin();
 			try {
-				$data1['code'] 	   		= strtoupper($data['code']);
-				$data1['name'] 			= strtoupper($data['name']);
-				$data1['description'] 	= strtoupper($data['description']);
-				$data1['created_id']   	= $user_id;
-				$data1['modified_id']   = $user_id;
-				$data1['created_date'] 	= date('Y-m-d H:i:s');
-				$data1['modified_date'] = date('Y-m-d H:i:s');
-				$data1['deleted'] 		= 0;
+				
+
+				$data1['name'] 	   			= $data['username'];
+				$data1['address'] 	   		= $data['alamat'];
+				$data1['email'] 			= $data['email'];
+				$data1['telephone'] 		= $data['telpon'];
+				$data1['created_id'] 		= $user_id;
+				$data1['modified_id']  	 	= $user_id;
+				$data1['created_date'] 		= date('Y-m-d H:i:s');
+				$data1['modified_date'] 	= date('Y-m-d H:i:s');
 			
-				$this->db->insert('c_groups', $data1);
-				$id = $this->db->insert_id();
+				$this->db->insert('customers', $data1);
+				$id_cust = $this->db->insert_id();
+
+				$file_element_name = 'filefoto';
+
+		        $nmfile = "file_".time(); //nama file saya beri nama langsung dan diikuti fungsi time
+		        $config['upload_path'] = './assets/bootstrap-adminlte/dist/img/'; //path folder
+		        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+		        $config['max_size'] = '2048'; //maksimum besar file 2M
+		        $config['max_width']  = '1288'; //lebar maksimum 1288 px
+		        $config['max_height']  = '768'; //tinggi maksimu 768 px
+		        $config['file_name'] = str_replace(" ", "_", $data['username']); //nama yang terupload nantiny
+		        $this->load->library('upload',$config);
+		         
+		        if($_FILES[$file_element_name]['name'])
+		        {
+			        if ($this->upload->do_upload($file_element_name))
+			        {
+		                $gbr = $this->upload->data();
+		                $data2 = array(
+		                  'username' =>$data['username'],
+		                  'password' =>$this->bcrypt->hash($data['password']),
+		                  'email' =>$data['email'],
+		                  'active' =>1,
+		                  'first_name' =>$data['firstname'],
+		                  'last_name' =>$data['lastname'],
+		                  'image' =>$gbr['file_name'],
+		                  'id_customers' =>$id_cust,
+		                );
+		                $this->db->insert('users',$data2); //akses model untuk menyimpan ke database
+		                $id_users = $this->db->insert_id();
+		            }
+		            @unlink($_FILES[$file_element_name]);
+		        }
+		        $id_users = $this->db->insert_id();
+		        $data3= array(
+                	'user_id' =>$id_users, 
+                	'group_id' =>$data['role'], 
+            	);
+            	$this->db->insert('user_groups',$data3);
+            	
 				
 			} catch (Exception $e) {  
 				crud_error($e->getMessage());
@@ -1058,32 +788,32 @@ class Systems extends CI_Controller {
 
 		if ( $action == 'r' ) {
 			$list = $this->system->get_users();
-			// var_dump($list);
-			// exit;
+			$count_users = count($list);
 			$data = array();
 			$no = $_POST['start'];
 			$nomor=0;
 			foreach ($list as $users) {
 				$no++;
-				$row = array();
-				$row[] = $users->username;
-				$row[] = $users->email;
-				$row[] = $users->first_name;
-				$row[] = $users->last_name;
-				$row[] = $users->phone;
+				// $row = array();
+				// $row[] = $users->username;
+				// $row[] = $users->email;
+				// $row[] = $users->first_name;
+				// $row[] = $users->last_name;
+				// $row[] = $users->phone;
 				
 
 				//add html for action
-				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_users('."'".$users->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-					  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_users('."'".$users->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
-			
-				$data[] = $row;
+				// $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_users('."'".$users->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+				// 	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_users('."'".$users->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+				$users->no = $no;
+				$users->DT_RowId = $users->id;
+				$data[] = $users;
 			}
 
 			$output1 = array(
 							"draw" => $_POST['draw'],
-							"recordsTotal" => $this->system->count_users(),
-							"recordsFiltered" => $this->system->count_users_filtered(),
+							"recordsTotal" => $count_users,
+							"recordsFiltered" => $this->system->count_filtered_users(),
 							"data" => $data,
 					);
 			//output to json format
@@ -1139,7 +869,7 @@ class Systems extends CI_Controller {
 		if ( !is_allow('r', $this->mdl_grp, $mdl) )
 			show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function users_edit($id)
@@ -1155,24 +885,42 @@ class Systems extends CI_Controller {
 		$data['inputerror'] = array();
 		$data['status'] = TRUE;
 
-		if($this->input->post('code') == '')
+		if($this->input->post('username') == '')
 		{
-			$data['inputerror'][] = 'code';
-			$data['error_string'][] = 'Code is required';
+			$data['inputerror'][] = 'username';
+			$data['error_string'][] = 'username is required';
 			$data['status'] = FALSE;
 		}
 
-		if($this->input->post('name') == '')
+		if($this->input->post('email') == '')
 		{
-			$data['inputerror'][] = 'name';
-			$data['error_string'][] = 'Name is required';
+			$data['inputerror'][] = 'email';
+			$data['error_string'][] = 'email is required';
 			$data['status'] = FALSE;
 		}
 
-		if($this->input->post('description') == '')
+		if($this->input->post('firstname') == '')
 		{
-			$data['inputerror'][] = 'description';
-			$data['error_string'][] = 'description is required';
+			$data['inputerror'][] = 'firstname';
+			$data['error_string'][] = 'firstname is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('lastname') == '')
+		{
+			$data['inputerror'][] = 'lastname';
+			$data['error_string'][] = 'lastname is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('password') == '')
+		{
+			$data['inputerror'][] = 'password';
+			$data['error_string'][] = 'password is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('confirmpassword') == '')
+		{
+			$data['inputerror'][] = 'confirmpassword';
+			$data['error_string'][] = 'confirmpassword is required';
 			$data['status'] = FALSE;
 		}
 		if($data['status'] === FALSE)
@@ -1182,8 +930,8 @@ class Systems extends CI_Controller {
 		}
 	}
 
-
-	function change_pwd( $action=NULL ) {
+	function change_pwd( $action=NULL ) 
+	{
 		if (!$this->ion_auth->logged_in()) 
 			redirect('main', 'refresh');
 
@@ -1305,7 +1053,7 @@ class Systems extends CI_Controller {
 		if ( !is_allow('r', $this->mdl_grp, $mdl) )
 			show_error(l('permission_failed_menu'));
 		
-		$this->getme_lib->go( $this->mdl_grp, $mdl );
+		$this->dashboard_lib->go( $this->mdl_grp, $mdl );
 	}
 	
 	public function change_pwd_edit($id)
@@ -1347,7 +1095,5 @@ class Systems extends CI_Controller {
 			exit();
 		}
 	}
-
-
 
 }

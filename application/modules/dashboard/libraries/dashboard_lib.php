@@ -30,44 +30,48 @@ class Dashboard_lib
 		$page_link = strtolower($module->page_link);
 
 		// APP INFO
-		$data3['app_title'] 		= $this->app_title;
-		$data3['app_title_short'] 	= $this->app_title_short;
-		$data3['title'] 	   		= strtoupper($module->module_group_name).' :: '.anchor($page_link, strtoupper($module->module_name));
-		$data3['title_module'] 	   	= strtoupper($module->module_name);
-		$data3['menus'] 	   		= $this->ci->systems_model->getGroups_Auth_ByGroupId( explode(",", sesUser()->u_groups) );
+		$data['app_title'] 		= $this->app_title;
+		$data['app_title_short'] 	= $this->app_title_short;
+		$data['title'] 	   		= strtoupper($module->module_group_name).' :: '.anchor($page_link, strtoupper($module->module_name));
+		$data['title_module'] 	   	= strtoupper($module->module_name);
+		$data['menus'] 	   		= $this->ci->systems_model->getGroups_Auth_ByGroupId( explode(",", sesUser()->u_groups) );
 		// DATA USER
 		$user = sesUser();
-		$data3['username']  		= strtoupper($user->username);
-		$data3['first_name']		= strtoupper($user->first_name);
-		$data3['last_name']			= strtoupper($user->last_name);
-		$data3['email']  			= $user->email;
-		$data3['image']  			= empty($user->image) ? "no_photo.jpg" : $user->image;
+		// var_dump($user);
+		// exit;
+		$data['username']  			= strtoupper($user->username);
+		$data['user_groups']  		= strtoupper($user->u_grp);
+		// var_dump($data['user_groups']);
+		// exit;
+		$data['first_name']			= strtoupper($user->first_name);
+		$data['last_name']			= strtoupper($user->last_name);
+		$data['email']  			= $user->email;
+		$data['image']  			= empty($user->image) ? "no_photo.jpg" : $user->image;
 		$date 						= new DateTime("@$user->last_login");
 
-		$data3['last_login'] 		= $date->format('D, d M Y h:i A');
+		$data['last_login'] 		= $date->format('D, d M Y h:i A');
 		$data2['title'] 			= strtoupper($module->module_group_name).' :: '.strtoupper($module->module_name);
 		$data2 						= is_array($data) ? array_merge($data2, $data) : $data2;
 
-		$data3['header'] 			= 'dashboard/header';
-		$data3['topbar'] 			= 'dashboard/topbar';
-		$data3['sidebar'] 			= 'dashboard/sidebar';
-		$data3['control_sidebar'] 	= 'dashboard/control_sidebar';
-		$data3['content_header'] 	= 'dashboard/content_header';
-		$data3['content'] 			= $page_link;
-		$data3['js'] 				= 'dashboard/js';
-		$data3['footer'] 			= 'dashboard/footer';	
-			
-		$this->ci->load->view('main', $data3);	
-		// $this->_ci->load->view('dashboard/header', $data3);
-		// $this->_ci->load->view('dashboard/topbar', $data3);
-		// $this->_ci->load->view('dashboard/sidebar', $data3);
-		// $this->_ci->load->view('dashboard/control_sidebar', $data3);
-		// $this->_ci->load->view('dashboard/content_header', $data3);
-		// $this->_ci->load->view('dashboard/left', $data3);
-		// $this->_ci->load->view('dashboard/js', $data3);
-		// $this->_ci->load->view('dashboard/footer', $data3);
-		// $this->_ci->load->view($page_link, $data2);
+		// $data['header'] 			= 'dashboard/header';
+		// $data['topbar'] 			= 'dashboard/topbar';
+		// $data['sidebar'] 			= 'dashboard/sidebar';
+		// $data['control_sidebar'] 	= 'dashboard/control_sidebar';
+		// $data['content_header'] 	= 'dashboard/content_header';
+		// // $data['content'] 			= $page_link;
+		// $data['js'] 				= 'dashboard/js';
+		// $data['footer'] 			= 'dashboard/footer';	
 
+		// $this->ci->load->view('main', $data);	
+		$this->ci->load->view('dashboard/header', $data);
+		$this->ci->load->view('dashboard/topbar', $data);
+		$this->ci->load->view('dashboard/sidebar', $data);
+		// echo '<div class="content-wrapper">';
+		// $this->ci->load->view('dashboard/content_header', $data);
+		$this->ci->load->view($page_link, $data2);
+		// $this->ci->load->view('dashboard/control_sidebar', $data);
+		// $this->ci->load->view('dashboard/footer', $data);
+		// $this->ci->load->view('j'.$page_link, $data2);		
 	}
 
 }

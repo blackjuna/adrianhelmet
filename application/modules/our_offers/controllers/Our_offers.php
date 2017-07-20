@@ -2,7 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Our_offers extends CI_Controller {
+	public $mdl_grp		= 'our_offers';
 
+	function __construct() {
+		parent::__construct();
+		date_default_timezone_set('Asia/Jakarta');
+		$this->load->model('Offers_model','Offers_m');
+		// $this->load->library('Xmpp');
+		// $xmppPrebind = new XmppPrebind('AXIOO-PC', 'http://axioo-pc:7070/http-bind/', 'conversejs', false, false);
+	}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,53 +28,37 @@ class Our_offers extends CI_Controller {
 	 */
 	public function index()
 	{
-		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		// $this->load->view('slider');
-		$this->load->view('sidebar');
-		$this->load->view('vcontact');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+		// // $this->load->library('session');
+		// $this->load->view('header');
+		// $this->load->view('topbar');
+		// // $this->load->view('slider');
+		// $this->load->view('sidebar');
+		// $this->load->view('vcontact');
+		// $this->load->view('bottombar');
+		// $this->load->view('js');
+		// $this->load->view('footer');
 	}
 
-	public function special_offers()
-	{
-		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('header_end');
-		$this->load->view('sidebar');
-		$this->load->view('special_offers');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+	public function special_offers( $username=NULL, $pwd=NULL ) {
+		$mdl = 'special_offers';		
+		// var_dump($mdl);
+		// exit;
+		$this->home_lib->go($this->mdl_grp, $mdl);
 	}
 
-	public function new_products()
+	public function new_product( $username=NULL, $pwd=NULL )
 	{
-		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('header_end');
-		$this->load->view('sidebar');
-		$this->load->view('new_products');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+		$mdl = 'new_product';		
+		// var_dump($mdl);
+		// exit;
+		$this->home_lib->go($this->mdl_grp, $mdl);
 	}
 
-	public function top_sellers()
+	public function top_sellers( $username=NULL, $pwd=NULL )
 	{
-		// $this->load->library('session');
-		$this->load->view('header');
-		$this->load->view('topbar');
-		$this->load->view('header_end');
-		$this->load->view('sidebar');
-		$this->load->view('top_sellers');
-		$this->load->view('bottombar');
-		$this->load->view('js');
-		$this->load->view('footer');
+		$mdl = 'top_sellers';		
+		// var_dump($mdl);
+		// exit;
+		$this->home_lib->go($this->mdl_grp, $mdl);
 	}
 }

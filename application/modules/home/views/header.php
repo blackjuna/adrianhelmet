@@ -25,12 +25,19 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Welcome!<strong> User</strong></div>
-	<div class="span6">
+	<div class="span6">Selamat datang, <strong> 
+		<?php if (isset($first_name))
+			{
+				echo''.ucwords($first_name).'';
+			}else
+			{
+				echo'pelanggan';
+			};?></strong></div>
+	<!-- <div class="span6">
 	<div class="pull-right">
 		<a href="product_summary.html"><span class="">Rp.</span></a>
 		<span class="btn btn-mini">155.00</span>
 		<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
 	</div>
-	</div>
+	</div> -->
 </div>

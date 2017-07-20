@@ -1,3 +1,4 @@
+<!-- </div> -->
 <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -9,12 +10,23 @@
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
       </div>
       <!-- /.tab-pane -->
 
       <!-- Settings tab content -->
-      <!-- <div class="tab-pane" id="control-sidebar-settings-tab">
-      </div> -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        
+      </div>
       <!-- /.tab-pane -->
     </div>
   </aside>

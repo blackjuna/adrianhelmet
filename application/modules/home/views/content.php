@@ -2,57 +2,25 @@
 			
 		</div> -->
 		<div class="span9">
-		<h4>Latest Products </h4>
+		<h4>New product</h4>
 			<ul class="thumbnails">
-				
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="<?= base_url();?>products/product_details"><img src="<?= base_url();?>assets/themes-shop/images/products/agv3.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="<?= base_url();?>products/product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/agv4.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/agv5.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a  href="product_details.html"><img src="<?= base_url();?>assets/themes-shop/images/products/agv6.jpg" alt=""/></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <p> 
-						Lorem Ipsum is simply dummy text. 
-					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
-					</div>
-				  </div>
-				</li>
+					<?php
+						$produk_list = $this->home_m->getcontent_query();
+						foreach($produk_list as $list){
+							$link_image = site_url('assets/images/'.$list->img_link);
+							// $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+							// $price = money_format('%i', $list->price);
+							echo '<li class="span3">';
+							echo '<div class="thumbnail">';
+							echo '<a href="'.site_url("products/details?id_product=".$list->id_product."").'"><img src="'.$link_image.'" alt="'.$list->product_name.'"/></a>';
+							echo '<h5>'.str_replace("-", " ", $list->product_name).'</h5><div class="caption"><p>'.$list->note1.'</p>';
+							echo '<h4 style="text-align:center"><a class="btn" href="'.site_url("invoices/add/".$list->id_product."").'">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="'.site_url("products/details?id_product=".$list->id_product."").'">Rp.'.$list->price.'</a></h4>';
+							echo '</div>';
+						}
+						// $this->home->test();
+						echo '</div>';
+						echo '</li>';
+					?>
 			</ul>	
 		</div>
 		</div>

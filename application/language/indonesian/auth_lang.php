@@ -27,7 +27,7 @@ $lang['login_subheading']      = 'Silakan login dengan email/username dan passwo
 $lang['login_identity_label']  = 'Email/Username:';
 $lang['login_password_label']  = 'Kata Sandi:';
 $lang['login_remember_label']  = 'Ingatkan Saya:';
-$lang['login_submit_btn']      = 'Login';
+$lang['login_submit_btn']      = 'Masuk';
 $lang['login_forgot_password'] = 'Lupa Kata Sandi?';
 
 // Index
